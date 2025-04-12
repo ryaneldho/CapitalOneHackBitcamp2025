@@ -1,4 +1,4 @@
-import { Typography, Button, Box } from '@mui/material';
+import { Card, CardContent, Typography, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
 import settings from '../assets/settings.png';
 import piggyImage from '../assets/piggy.png';
 import '../css/piggy.css';
@@ -14,6 +14,8 @@ type Props = {
   whichStateEnabled: SwitchStates;
   allTransactions: Transaction[];
   budget: string;
+  selectedMonth: string;
+  setSelectedMonth: React.Dispatch<React.SetStateAction<string>>;
 };
 
 type SummaryProps = {
@@ -31,17 +33,32 @@ const typeToState: Record<string, keyof SwitchStates> = {
   bill: 'bills',
 };
 
+const months = [
+  'January', 'February', 'March', 'April', 'May', 'June',
+  'July', 'August', 'September', 'October', 'November', 'December',
+];
 
-export default function Piggy({whichStateEnabled, allTransactions, budget}: Props) {
+
+
+export default function Piggy({whichStateEnabled, allTransactions, budget, selectedMonth, setSelectedMonth}: Props) {
   let earnings = 0;
   let spent = 0;
 
+
   const filteredTransactions = allTransactions.filter((transaction) => {
-    const transactionType = transaction.type.toLowerCase();
+    const transactionType = transaction.type;
     return whichStateEnabled[typeToState[transactionType]];
   });
 
-  filteredTransactions.forEach((transaction) => {
+  const filteredByMonth = filteredTransactions.filter((transaction) => {
+    const rawDate = transaction.transaction_date || transaction.purchase_date;
+    if (!rawDate) return false;
+    const txDate = new Date(rawDate);
+    const monthName = txDate.toLocaleString('default', { month: 'long' });
+    return monthName === selectedMonth;
+  });
+
+  filteredByMonth.forEach((transaction) => {
     const type = transaction.type
     if (['deposit', 'loan'].includes(type)) {
       earnings += transaction.amount;
@@ -54,9 +71,28 @@ export default function Piggy({whichStateEnabled, allTransactions, budget}: Prop
   return (
     <Box className="border">
       <Header/>
-      <Typography variant="h4" id="summaryTitle" >
-        Summary for April
-      </Typography>
+
+    <Typography variant="h4" id="summaryTitle">
+      Summary for
+      <Select
+        value={selectedMonth}
+        onChange={(e) => setSelectedMonth(e.target.value)}      
+        variant = 'standard'
+        sx={{ fontSize: '2.0rem', ml: 1 }}
+        defaultValue='Aptil'
+        disableUnderline
+        id="summaryTitle"
+      >
+        {months.map((month, index) => (
+          <MenuItem key={month} value={month}>
+            {month}
+          </MenuItem>
+        ))}
+      </Select>
+    </Typography>
+
+
+
 
       <Box className="container">
         <Summary earnings={earnings} spent={spent} budget={budget}/>
@@ -81,10 +117,10 @@ function Summary({earnings, spent, budget}: SummaryProps) {
     <Box className="summary">
       <Box className="summaryDetails">
         <Typography variant="subtitle1" id="earningsMade">
-          Earnings: <br />${earnings.toFixed(2)}
+          Money In: <br />${earnings.toFixed(2)}
         </Typography>
         <Typography variant="subtitle1" id="moneySpent">
-          Spent: <br />${spent.toFixed(2)}
+          Money Out: <br />${spent.toFixed(2)}
         </Typography>
       </Box>
       <Box className="summaryDetails">
@@ -92,7 +128,7 @@ function Summary({earnings, spent, budget}: SummaryProps) {
           Budget: <br />${Number(budget).toFixed(2)}
         </Typography>
         <Typography variant="subtitle1" id="netChange">
-          Change: <br />${(earnings-spent).toFixed(2)}
+          Net Change: <br />${(earnings-spent).toFixed(2)}
         </Typography>
       </Box>
     </Box>

@@ -20,14 +20,21 @@ import '../css/App.css'
 
 
 type Props = {
-  sortedTransactions: Transaction[]
+  sortedTransactions: Transaction[];
+  selectedMonth: string;    
 };
 
-export default function Transactions({ sortedTransactions }: Props) {
+export default function Transactions({ sortedTransactions, selectedMonth }: Props) {
   const [clicked, setClicked] = useState<boolean>(false);
   const navigate = useNavigate();
 
-
+  const filteredByMonth = sortedTransactions.filter((transaction) => {
+    const rawDate = transaction.transaction_date || transaction.purchase_date;
+    if (!rawDate) return false;
+    const txDate = new Date(rawDate);
+    const monthName = txDate.toLocaleString('default', { month: 'long' });
+    return monthName === selectedMonth;
+  });
   useEffect(() => {
     if (clicked) {
       setClicked(false)
@@ -52,7 +59,7 @@ export default function Transactions({ sortedTransactions }: Props) {
             </TableRow>
           </TableHead>
           <TableBody>
-            {sortedTransactions.map((row, idx) => (
+            {filteredByMonth.map((row, idx) => (
               <TableRow
                 key={row._id}
               >
