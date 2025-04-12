@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const axiosApiInstance = axios.create({
-  baseURL: 'https://api.nessieisreal.com',
+  baseURL: 'http://api.nessieisreal.com/',
   params: {
     key: 'aa28cdb8b75a206af983b242bed387cc',
   },
