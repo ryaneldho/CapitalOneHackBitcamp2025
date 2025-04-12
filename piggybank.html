@@ -6,9 +6,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piggybank</title> 
     <link rel="stylesheet" href="piggybank.css" type="text/css">
-    <!-- <script src="code.js" defer></script> -->
+    <script src="code.js" defer></script>
 </head>
 
 <body>
+    <br><br><br>
+
+    <div class="container">
+        <h2 id="budget">Budget: $1000.00</h2>
+        <h3 id="moneySpent">Spent: $500.00</h3>
+
+        <div class="piggy-container">
+            <img src="piggy.png" id="piggyBank"><img>
+            <div class="fill-bar" id="fillBar"></div>
+          </div>
+
+        <div class="buttons">
+            <button onclick="updateFillBar()">Calculate</button>
+            <button onclick="goToExpandTransactions()">Expand Transactions</button>
+        </div>
+
+    <div>
     
+
 </body>

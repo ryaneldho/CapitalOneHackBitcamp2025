@@ -1,0 +1,42 @@
+.container {
+    text-align: center;
+    align-items: center;
+}
+
+#piggyBank {
+    width: 100%;
+    height: auto;
+    display: block;
+    z-index: 1;
+}
+
+.piggy-container {
+    width: 400px;
+    height: 400px;
+    margin: 20px auto;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .fill-bar {
+    position: absolute;
+    bottom: 0%; 
+    left: 0;
+    height: 20px;
+    width: 0%;
+    background-color: gold;
+    transition: width 0.3s ease-in-out;
+    border-radius: 10px;
+    opacity: 0.8;
+    z-index: 2;
+  }
+
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #f6a91a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+  }
