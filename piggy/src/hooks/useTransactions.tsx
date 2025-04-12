@@ -1,24 +1,36 @@
 import { useEffect, useState } from 'react';
-import { getDeposits, getPurchases } from '../api/transactions';
+import { getBills, getLoans, getDeposits, getPurchases, getTransfers, getWithdrawals } from '../api/transactions';
+export interface Transaction {
+  amount: number;
+  transaction_date?: string;
+  payment_date?: string;
+  [key: string]: any;
+};
 
 export function useTransactions(userId: string) {
-  const [deposits, setDeposits] = useState([]);
-  const [loans, setLoans] = useState([]);
-  const [purchases, setPurchases] = useState([]);
-  const [withdrawals, setWithdrawals] = useState([]);
-  const [transfer, setTransfers] = useState([]);
-  const [bills, setBills] = useState([]);
+  const [deposits, setDeposits] = useState<Transaction[]>([]);
+  const [loans, setLoans] = useState<Transaction[]>([]);
+  const [purchases, setPurchases] = useState<Transaction[]>([]);
+  const [withdrawals, setWithdrawals] = useState<Transaction[]>([]);
+  const [transfers, setTransfers] = useState<Transaction[]>([]);
+  const [bills, setBills] = useState<Transaction[]>([]);
 
   const fetchData = async () => {
     try {
-      const [depRes, purRes] = await Promise.all([
+      const [depRes, loanRes, purRes, withdrawRes, transferRes, billRes] = await Promise.all([
         getDeposits(userId),
+        getLoans(userId),
         getPurchases(userId),
+        getWithdrawals(userId),
+        getTransfers(userId),
+        getBills(userId),
       ]);
-      console.log(depRes);
-      console.log(purRes);
       setDeposits(depRes.data);
+      setLoans(loanRes.data);
       setPurchases(purRes.data);
+      setWithdrawals(withdrawRes.data);
+      setTransfers(transferRes.data);
+      setBills(billRes.data);
     } catch (err) {
       console.error(err);
     }
@@ -30,5 +42,5 @@ export function useTransactions(userId: string) {
     return () => clearInterval(interval);
   }, [userId]);
 
-  return { deposits, purchases };
+  return { deposits, loans, purchases, withdrawals, transfers, bills };
 }
