@@ -1,0 +1,93 @@
+/* src/pages/Piggy.css */
+
+body {
+  font-family: 'Raleway';
+  background-color: #fffdf5;
+}
+
+.border {
+  max-width: 450px;
+  min-height: 750px;
+  margin: 40px auto;
+  padding: 32px;
+  border: 4px solid #d9d923;
+  border-radius: 16px;
+}
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+#settings {
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+}
+
+#summaryTitle {
+  font-family: 'Raleway';
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.container {
+  text-align: center;
+  font-weight: lighter;
+}
+
+
+.summary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.summaryDetails {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+
+.summaryDetails h4,
+.summaryDetails .MuiTypography-root {
+  background-color: #fbe6c2;
+  padding: 12px 40px;
+  border-radius: 12px;
+  font-weight: normal;
+}
+
+
+.piggy-container {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+#piggyBank {
+  width: 100%;
+  height: auto;
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.fill-bar {
+  width: 100%;
+  height: 25px;
+  background-color: gold;
+  border-radius: 10px;
+  opacity: 0.8;
+  transition: width 0.4s ease-in-out;
+}
