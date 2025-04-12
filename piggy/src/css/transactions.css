@@ -1,5 +1,6 @@
 #transactionsBody {
     height: 100vh;
+    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -7,28 +8,27 @@
 
   .table-container {
     height: 70vh; 
-    width: 35%;
     overflow-y: auto;
     border: 1px solid gray;
     margin: 0 auto;
     margin-top: 5%;
   }
 
-  table {
+  .MuiTable-root {
     width: 100%;
     border-collapse: collapse;
   }
 
-  th, td {
-    padding: 10px;
+  .MuiTableCell-head {
+    /* padding: 10px; */
     border: 1px solid gray;
     text-align: center;
   }
 
-  thead {
+  .MuiTableCell-body {
     background: gray;
   }
 
   #returnPiggyBankPage {
-    margin-top: 2%;
+    margin-top: 200%;
   }

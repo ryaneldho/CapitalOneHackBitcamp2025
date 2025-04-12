@@ -5,6 +5,7 @@ import '../css/piggy.css';
 import React, { useState } from 'react';
 import PiggyToTransactions from '../pages/PiggyToTransactions';
 
+import '../css/App.css';
 
 export default function Piggy() {
   return (

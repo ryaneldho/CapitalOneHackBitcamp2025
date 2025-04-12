@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import { getBills, getLoans, getDeposits, getPurchases, getTransfers, getWithdrawals } from '../api/transactions';
 export interface Transaction {
+  _id: string;
   amount: number;
+  type: string;
   transaction_date?: string;
-  payment_date?: string;
+  purchase_date?: string;
   [key: string]: any;
 };
 
