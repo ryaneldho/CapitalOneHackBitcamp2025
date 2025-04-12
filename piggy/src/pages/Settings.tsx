@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import '../css/settings.css';
 import { Typography, Button, Box, FormGroup, Switch, FormControlLabel, TextField } from '@mui/material';
 
@@ -35,10 +36,27 @@ function Settings({ switchStates, setSwitchStates, budgetValue, setBudgetValue }
       
   //   </div>
   // );
+
+  const [clicked, setClicked] = useState<boolean>(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+      if (clicked) {
+        setClicked(false)
+        navigate("/"); // Redirect after state update
+      }
+    }, [clicked, navigate]);
   
   return (
     <Box className="border">
-      <Header/>
+      <Box className="header">
+        <Typography variant="h4" id="title">
+          Settings
+        </Typography>
+          <Button variant="outlined" color="error" sx={{ mb: 2 }} onClick={() => setClicked(true)}>
+                GO BACK
+          </Button>
+      </Box>
       <Box>
         <Budget budgetValue={budgetValue} setBudgetValue={setBudgetValue}/>
       </Box>   

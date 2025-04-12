@@ -4,13 +4,14 @@ import piggyImage from '../assets/piggy.png';
 import '../css/piggy.css';
 import React, { useState } from 'react';
 import PiggyToTransactions from '../pages/PiggyToTransactions';
+import PiggyToSettings from './PiggyToSettings';
 
 import '../css/App.css';
 
 export default function Piggy() {
   return (
     <Box className="border">
-      <Header />
+      <Header/>
       <Typography variant="h4" id="summaryTitle" >
         Summary for April
       </Typography>
@@ -28,10 +29,7 @@ export default function Piggy() {
 function Header() {
   return (
     <Box className="header">
-      <Typography variant="h5" id="welcome">
-        Hello Ryan
-      </Typography>
-      <img src={settings} id="settings" alt="Settings" />
+      <PiggyToSettings/>
     </Box>
   );
 }
