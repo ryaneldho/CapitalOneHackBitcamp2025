@@ -40,7 +40,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Piggy />} />
           <Route path="/Transactions" element={<Transactions userId={accountId}/>} />
-          <Route path="/Settings" element={<Settings switchStates={switchStates} setSwitchStates={setSwitchStates}/>} />
+          <Route path="/Settings" element={<Settings switchStates={switchStates} setSwitchStates={setSwitchStates} budgetValue={budgetValue} setBudgetValue={setBudgetValue}/>} />
         </Routes>
       </Router>
       {/* <TestDashboard userId = {accountId}/> */}
