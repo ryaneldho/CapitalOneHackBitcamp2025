@@ -41,7 +41,6 @@ function App() {
           <Route path="/" element={<Piggy />} />
           <Route path="/Transactions" element={<Transactions userId={accountId}/>} />
         </Routes>
-        <Piggy/>
       </Router>
       {/* <TestDashboard userId = {accountId}/> */}
       {/* <Piggy></Piggy> */}
