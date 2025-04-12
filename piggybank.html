@@ -7,26 +7,49 @@
     <title>Piggybank</title> 
     <link rel="stylesheet" href="piggybank.css" type="text/css">
     <script src="code.js" defer></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=National+Park:wght@200..800&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    
+
+    
 </head>
 
 <body>
     <br><br><br>
 
-    <div class="container">
-        <h2 id="budget">Budget: $1000.00</h2>
-        <h3 id="moneySpent">Spent: $500.00</h3>
+    <div class="border">
 
-        <div class="piggy-container">
-            <img src="piggy.png" id="piggyBank"><img>
-            <div class="fill-bar" id="fillBar"></div>
-          </div>
+        <h2 id = "welcome"> Hello Ryan </h2>
+        <h2 id = "summaryTitle"> Summary for April </h1>
 
-        <div class="buttons">
-            <button onclick="updateFillBar()">Calculate</button>
-            <button onclick="goToExpandTransactions()">Expand Transactions</button>
-        </div>
+        <div class="container">
+            <div class = summary>
+                <div class = "summaryDetails"> 
+                    <h4 id="earningsMade"> Earnings: <br> $0.00 </h4>
+                    <h4 id="moneySpent">Spent: <br> $500.00 </h4>
+                </div>
+    
+                <div class = "summaryDetails"> 
+                    <h4 id="budget">Budget: <br>$1000.00</h4>
+                    <h4 id="netChange"> Change: <br> -$500.00 </h4>
+                </div>
+            </div>
 
-    <div>
+        
+      
+            <div class="piggy-container">
+                <img src="piggy.png" id="piggyBank"><img>
+                <div class="fill-bar" id="fillBar"></div>
+              </div>
+    
+            <div class="buttons">
+                <button onclick="updateFillBar()">Calculate</button>
+                <button onclick="goToExpandTransactions()">Expand Transactions</button>
+            </div>
+        <div>
+    </div>
+
     
 
 </body>

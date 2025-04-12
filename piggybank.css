@@ -1,6 +1,8 @@
 .container {
     text-align: center;
     align-items: center;
+    font-family: 'Raleway';
+    font-weight: lighter;
 }
 
 #piggyBank {
@@ -8,14 +10,16 @@
     height: auto;
     display: block;
     z-index: 1;
+    margin-bottom: 20px;
 }
 
 .piggy-container {
-    width: 400px;
-    height: 400px;
+    width: 300px;
+    height: 300px;
     margin: 20px auto;
     position: relative;
     overflow: hidden;
+    font-weight: 100;
   }
 
   .fill-bar {
@@ -29,6 +33,7 @@
     border-radius: 10px;
     opacity: 0.8;
     z-index: 2;
+    margin-top: 100%;
   }
 
   button {
@@ -39,4 +44,80 @@
     border: none;
     border-radius: 6px;
     cursor: pointer;
+    font-family: 'Raleway'
   }
+
+  .border{
+    align-items: center;
+    border-style: solid;
+    padding-bottom: 5%;
+    margin-left: 35%;
+    margin-right: 35%;
+    border-width: 10%;
+    border-color: #f6a91a;;
+    border-radius: 5%;
+  }
+  
+
+  .summaryDetails{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: auto;
+    height: auto;
+
+  }
+
+  #budget{
+    background-color: #e9cb95;
+    padding-top: 10%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 10%;
+    border-radius: 10%;
+  }
+
+  #moneySpent{
+    background-color: #e9cb95;
+    padding-top: 10%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 10%;
+    border-radius: 10%;
+  }
+
+  #earningsMade{
+    background-color: #e9cb95;
+    padding-top: 10%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 10%;
+    border-radius: 10%;
+  }
+
+  #netChange{
+    background-color: #e9cb95;
+    padding-top: 10%;
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 10%;
+    border-radius: 10%;
+  }
+
+
+ 
+  #welcome{
+    font-family: 'Raleway';
+    margin-left: 10%;
+    margin-bottom: 5%;
+    margin-top: 10%;
+  } 
+
+  #summaryTitle{
+    font-family: 'Raleway';
+    margin-left: 10%;
+
+  } 
