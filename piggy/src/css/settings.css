@@ -8,16 +8,19 @@ body {
     min-height: 750px;
     margin: 40px auto;
     padding: 32px;
-    border: 4px solid #d9d923;
+    border: 4px solid #E9CA93;
     border-radius: 16px;
+    background-color:#e7dbc6
   }
 
   .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 10%;
+    position: relative
   }
+  
 
   .container {
     text-align: center;
@@ -27,7 +30,7 @@ body {
   .options{
     font-family: 'Raleway';
     size: 100px;
-    margin-top: 10%;
+    margin-top: 5%;
   }
 
 
