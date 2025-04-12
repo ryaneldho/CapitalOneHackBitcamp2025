@@ -20,6 +20,7 @@ type SwitchStates = {
   bills: boolean;
 };
 
+
 function App() {
   const [switchStates, setSwitchStates] = useState<SwitchStates>({
     deposits: true,
@@ -29,6 +30,9 @@ function App() {
     transfers: true,
     bills: true,
   });
+
+  const [budgetValue, setBudgetValue] = useState('');
+
 
   return (
     <div className="App">
@@ -41,7 +45,8 @@ function App() {
       </Router>
       {/* <TestDashboard userId = {accountId}/> */}
       {/* <Piggy></Piggy> */}
-      {/* <Settings switchStates={switchStates} setSwitchStates={setSwitchStates} /> */}
+      {/* <Settings switchStates={switchStates} setSwitchStates={setSwitchStates} 
+      budgetValue={budgetValue} setBudgetValue={setBudgetValue}  /> */}
       <Transactions userId={accountId}></Transactions>
     </div>
   );
