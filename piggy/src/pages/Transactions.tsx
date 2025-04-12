@@ -58,7 +58,7 @@ export default function Transactions({ sortedTransactions }: Props) {
               >
                 <TableCell>{idx + 1}</TableCell>
                 <TableCell color=''>{row.type.charAt(0).toUpperCase() + row.type.slice(1)}</TableCell>
-                <TableCell sx={{ color: ['payment', 'withdrawal'].includes(row.type) ? 'red' : 'green', fontWeight: 'bold', }}>{row.amount}</TableCell>
+                <TableCell sx={{ color: ['deposit', 'loan'].includes(row.type) ? 'green' : 'red', fontWeight: 'bold'}}>{row.amount}</TableCell>
                 <TableCell>{row.purchase_date || row.transaction_date}</TableCell>
               </TableRow>
             ))}

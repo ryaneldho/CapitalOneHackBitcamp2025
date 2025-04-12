@@ -15,7 +15,40 @@ type Props = {
   allTransactions: Transaction[];
 };
 
+type SummaryProps = {
+  earnings: number,
+  spent: number
+}
+
+const typeToState: Record<string, keyof SwitchStates> = {
+  deposit: 'deposits',
+  withdrawal: 'withdrawals',
+  purchase: 'purchase',
+  loan: 'loans',
+  transfer: 'transfers',
+  bill: 'bills',
+};
+
+
 export default function Piggy({whichStateEnabled, allTransactions}: Props) {
+  let earnings = 0;
+  let spent = 0;
+
+  const filteredTransactions = allTransactions.filter((transaction) => {
+    const transactionType = transaction.type.toLowerCase();
+    return whichStateEnabled[typeToState[transactionType]];
+  });
+
+  filteredTransactions.forEach((transaction) => {
+    const type = transaction.type
+    if (['deposit', 'loan'].includes(type)) {
+      earnings += transaction.amount;
+    } else {
+      spent += transaction.amount;
+    }
+  });
+
+
   return (
     <Box className="border">
       <Header/>
@@ -24,7 +57,7 @@ export default function Piggy({whichStateEnabled, allTransactions}: Props) {
       </Typography>
 
       <Box className="container">
-        <Summary />
+        <Summary earnings={earnings} spent={spent}/>
         <ImageAndBar />
         <PiggyToTransactions />
       </Box>
@@ -41,15 +74,15 @@ function Header() {
   );
 }
 
-function Summary() {
+function Summary({earnings, spent}: SummaryProps) {
   return (
     <Box className="summary">
       <Box className="summaryDetails">
         <Typography variant="subtitle1" id="earningsMade">
-          Earnings: <br /> $0.00
+          Earnings: <br />${earnings.toFixed(2)}
         </Typography>
         <Typography variant="subtitle1" id="moneySpent">
-          Spent: <br /> $500.00
+          Spent: <br />${spent.toFixed(2)}
         </Typography>
       </Box>
       <Box className="summaryDetails">

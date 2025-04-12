@@ -29,7 +29,12 @@ export function useTransactions(userId: string) {
       ]);
       setDeposits(depRes.data);
       setLoans(loanRes.data);
-      setPurchases(purRes.data);
+      setPurchases(
+        purRes.data.map((purchase) => ({
+          ...purchase,
+          type: 'purchase',
+        }))
+      );
       setWithdrawals(withdrawRes.data);
       setTransfers(transferRes.data);
       setBills(billRes.data);

@@ -34,6 +34,7 @@ function App() {
     ...transfers,
     ...bills
   ]
+  console.log(allTransactions)
   const sortedTransactions = allTransactions.sort((x, y) => {
     const dateX = new Date(x.transaction_date || x.purchase_date || "").getTime()
     const dateY = new Date(y.transaction_date || y.purchase_date || "").getTime()
