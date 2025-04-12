@@ -2,6 +2,7 @@ import { Typography, Button, Box } from '@mui/material';
 import settings from '../assets/settings.png';
 import piggyImage from '../assets/piggy.png';
 import '../css/piggy.css';
+import '../css/App.css';
 
 export default function Piggy() {
   return (

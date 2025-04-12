@@ -3,6 +3,7 @@ import './css/App.css';
 import TestDashboard from './components/TestDashboard';
 import Piggy from './pages/Piggy';
 import Settings from './pages/Settings'
+import Transactions from './pages/Transactions';
 import { Console } from 'console';
 
 const accountId = "67f9f6fb9683f20dd5194d5c"
@@ -30,7 +31,9 @@ function App() {
   return (
     <div className="App">
       {/* <TestDashboard userId = {accountId}/> */}
-      <Settings switchStates={switchStates} setSwitchStates={setSwitchStates} />
+      {/* <Piggy></Piggy> */}
+      {/* <Settings switchStates={switchStates} setSwitchStates={setSwitchStates} /> */}
+      <Transactions userId={accountId}></Transactions>
     </div>
   );
 }

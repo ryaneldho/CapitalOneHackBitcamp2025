@@ -1,45 +1,78 @@
-import { Typography, Button, Box } from '@mui/material';
+import { 
+  Typography, 
+  Button, 
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper
+} from '@mui/material';
 import React from 'react';
-import settings from '../assets/settings.png';
 import TestDashboard from '../components/TestDashboard';
+import { Transaction } from '../hooks/useTransactions';
+import { useTransactions } from '../hooks/useTransactions';
 import '../css/transactions.css';
+import '../css/App.css'
 
-function Transactions() {
+
+type Props = {
+  userId: string;
+};
+
+export default function Transactions( { userId }: Props)  {
+
+  const { deposits, loans, purchases, withdrawals, transfers, bills } = useTransactions(userId);
+
+  const allTransactions: Transaction[] = [
+    ...deposits,
+    ...loans,
+    ...purchases,
+    ...withdrawals,
+    ...transfers,
+    ...bills
+  ]
+  const sortedTransactions = allTransactions.sort((x, y) => {
+    const dateX = new Date(x.transaction_date || x.purchase_date || "").getTime()
+    const dateY = new Date(y.transaction_date || y.purchase_date || "").getTime()
+    return dateY - dateX
+  })
+
+  console.log(sortedTransactions)
+
   return (
-    <Box className="Transactions">
-      <div className="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Transaction #</th>
-              <th>Transaction Type</th>
-              <th>Amount</th>
-              <th>Date</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>1</td><td>Item 1</td><td>Hello 1</td><td>${Math.random().toFixed(2)}</td></tr>
-            <tr><td>2</td><td>Item 2</td><td>Hello 2</td><td>${Math.random().toFixed(2)}</td></tr>
-            <tr><td>3</td><td>Item 3</td><td>Hello 3</td><td>${Math.random().toFixed(2)}</td></tr>
-            <tr><td>4</td><td>Item 4</td><td>Hello 4</td><td>${Math.random().toFixed(2)}</td></tr>
-            <tr><td>5</td><td>Item 5</td><td>Hello 5</td><td>${Math.random().toFixed(2)}</td></tr>
-            <tr><td>6</td><td>Item 6</td><td>Hello 6</td><td>${Math.random().toFixed(2)}</td></tr>
-            <tr><td>7</td><td>Item 7</td><td>Hello 7</td><td>${Math.random().toFixed(2)}</td></tr>
-            <tr><td>8</td><td>Item 8</td><td>Hello 8</td><td>${Math.random().toFixed(2)}</td></tr>
-            <tr><td>9</td><td>Item 9</td><td>Hello 9</td><td>${Math.random().toFixed(2)}</td></tr>
-            <tr><td>10</td><td>Item 10</td><td>Hello 10</td><td>${Math.random().toFixed(2)}</td></tr>
-            <tr><td>10</td><td>Item 10</td><td>Hello 10</td><td>${Math.random().toFixed(2)}</td></tr>
-            <tr><td>10</td><td>Item 10</td><td>Hello 10</td><td>${Math.random().toFixed(2)}</td></tr>
-            <tr><td>10</td><td>Item 10</td><td>Hello 10</td><td>${Math.random().toFixed(2)}</td></tr>
-            <tr><td>10</td><td>Item 10</td><td>Hello 10</td><td>${Math.random().toFixed(2)}</td></tr>
-            <tr><td>10</td><td>Item 10</td><td>Hello 10</td><td>${Math.random().toFixed(2)}</td></tr>
+    <Box className="border">
+      <Button variant="outlined" color="error" sx={{mb:2}}>
+        GO BACK
+      </Button>
 
-          </tbody>
-        </table>
-      </div>
+      <TableContainer className="table-container"component={Paper}  sx={{ maxHeight: 750, maxWidth:450, margin: '0 auto', overflowX: 'auto', overflowY: 'auto'}}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell><strong>Transaction #</strong></TableCell>
+              <TableCell><strong>Type</strong></TableCell>
+              <TableCell><strong>Amount ($)</strong></TableCell>
+              <TableCell><strong>Date</strong></TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {sortedTransactions.map((row, idx) => (
+              <TableRow
+                key={row._id}
+              >
+                <TableCell>{idx + 1}</TableCell>
+                <TableCell color=''>{row.type.charAt(0).toUpperCase() + row.type.slice(1)}</TableCell>
+                <TableCell sx={{color: ['payment', 'withdrawal'].includes(row.type) ? 'red' : 'green',fontWeight: 'bold',}}>{row.amount}</TableCell>
+                <TableCell>{row.purchase_date || row.transaction_date}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
     </Box>
-   
   );
 }
 
-export default Transactions;

@@ -6,8 +6,6 @@ type Props = {
   userId: string;
 };
 
-
-
 export default function TestDashboard({ userId }: Props) {
   const { deposits, loans, purchases, withdrawals, transfers, bills } = useTransactions(userId);
 
@@ -31,9 +29,11 @@ export default function TestDashboard({ userId }: Props) {
   // console.log(allTransactions);
 
   const sortedTransactions = allTransactions.sort((x, y) => {
-    const dateX = new Date(x.transaction_date || x.purchase_date).getTime()
-    const dateY = new Date(y.transaction_date || y.purchase_date).getTime()
-    return dateY - dateX
+
+    // const dateX = new Date(x.transaction_date || x.purchase_date).getTime()
+    // const dateY = new Date(y.transaction_date || y.purchase_date).getTime()
+    // return dateY - dateX
+    return 9
   })
 
   // console.log(sortedTransactions)
