@@ -5,7 +5,6 @@ import Piggy from './pages/Piggy';
 import Settings from './pages/Settings'
 import Transactions from './pages/Transactions';
 import { Console } from 'console';
-import Transactions from './pages/Transactions';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 
@@ -36,7 +35,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Piggy />} />
-          <Route path="/Transactions" element={<Transactions />} />
+          <Route path="/Transactions" element={<Transactions userId={accountId}/>} />
         </Routes>
         <Piggy/>
       </Router>
