@@ -20,28 +20,13 @@ import '../css/App.css'
 
 
 type Props = {
-  userId: string;
+  sortedTransactions: Transaction[]
 };
 
-export default function Transactions({ userId }: Props) {
+export default function Transactions({ sortedTransactions }: Props) {
   const [clicked, setClicked] = useState<boolean>(false);
   const navigate = useNavigate();
 
-  const { deposits, loans, purchases, withdrawals, transfers, bills } = useTransactions(userId);
-
-  const allTransactions: Transaction[] = [
-    ...deposits,
-    ...loans,
-    ...purchases,
-    ...withdrawals,
-    ...transfers,
-    ...bills
-  ]
-  const sortedTransactions = allTransactions.sort((x, y) => {
-    const dateX = new Date(x.transaction_date || x.purchase_date || "").getTime()
-    const dateY = new Date(y.transaction_date || y.purchase_date || "").getTime()
-    return dateY - dateX
-  })
 
   useEffect(() => {
     if (clicked) {

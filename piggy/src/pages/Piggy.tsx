@@ -5,10 +5,17 @@ import '../css/piggy.css';
 import React, { useState } from 'react';
 import PiggyToTransactions from '../pages/PiggyToTransactions';
 import PiggyToSettings from './PiggyToSettings';
+import {SwitchStates} from '../App'
+import {Transaction} from '../hooks/useTransactions'
 
 import '../css/App.css';
 
-export default function Piggy() {
+type Props = {
+  whichStateEnabled: SwitchStates;
+  allTransactions: Transaction[];
+};
+
+export default function Piggy({whichStateEnabled, allTransactions}: Props) {
   return (
     <Box className="border">
       <Header/>
