@@ -36,12 +36,13 @@ function App() {
         <Routes>
           <Route path="/" element={<Piggy />} />
           <Route path="/Transactions" element={<Transactions userId={accountId}/>} />
+          <Route path="/Settings" element={<Settings switchStates={switchStates} setSwitchStates={setSwitchStates}/>} />
         </Routes>
       </Router>
       {/* <TestDashboard userId = {accountId}/> */}
       {/* <Piggy></Piggy> */}
       {/* <Settings switchStates={switchStates} setSwitchStates={setSwitchStates} /> */}
-      <Transactions userId={accountId}></Transactions>
+      {/* <Transactions userId={accountId}></Transactions> */}
     </div>
   );
 }

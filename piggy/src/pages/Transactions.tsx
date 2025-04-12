@@ -1,6 +1,6 @@
-import { 
-  Typography, 
-  Button, 
+import {
+  Typography,
+  Button,
   Box,
   Table,
   TableBody,
@@ -10,7 +10,8 @@ import {
   TableRow,
   Paper
 } from '@mui/material';
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import TestDashboard from '../components/TestDashboard';
 import { Transaction } from '../hooks/useTransactions';
 import { useTransactions } from '../hooks/useTransactions';
@@ -22,7 +23,9 @@ type Props = {
   userId: string;
 };
 
-export default function Transactions( { userId }: Props)  {
+export default function Transactions({ userId }: Props) {
+  const [clicked, setClicked] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const { deposits, loans, purchases, withdrawals, transfers, bills } = useTransactions(userId);
 
@@ -40,15 +43,20 @@ export default function Transactions( { userId }: Props)  {
     return dateY - dateX
   })
 
-  console.log(sortedTransactions)
+  useEffect(() => {
+    if (clicked) {
+      setClicked(false)
+      navigate("/"); // Redirect after state update
+    }
+  }, [clicked, navigate]);
 
   return (
     <Box className="border">
-      <Button variant="outlined" color="error" sx={{mb:2}}>
+      <Button variant="outlined" color="error" sx={{ mb: 2 }} onClick={() => setClicked(true)}>
         GO BACK
       </Button>
 
-      <TableContainer className="table-container"component={Paper}  sx={{ maxHeight: 750, maxWidth:450, margin: '0 auto', overflowX: 'auto', overflowY: 'auto'}}>
+      <TableContainer className="table-container" component={Paper} sx={{ maxHeight: 750, maxWidth: 450, margin: '0 auto', overflowX: 'auto', overflowY: 'auto' }}>
         <Table>
           <TableHead>
             <TableRow>
@@ -65,7 +73,7 @@ export default function Transactions( { userId }: Props)  {
               >
                 <TableCell>{idx + 1}</TableCell>
                 <TableCell color=''>{row.type.charAt(0).toUpperCase() + row.type.slice(1)}</TableCell>
-                <TableCell sx={{color: ['payment', 'withdrawal'].includes(row.type) ? 'red' : 'green',fontWeight: 'bold',}}>{row.amount}</TableCell>
+                <TableCell sx={{ color: ['payment', 'withdrawal'].includes(row.type) ? 'red' : 'green', fontWeight: 'bold', }}>{row.amount}</TableCell>
                 <TableCell>{row.purchase_date || row.transaction_date}</TableCell>
               </TableRow>
             ))}
