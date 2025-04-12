@@ -56,7 +56,7 @@ function App() {
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<Piggy whichStateEnabled={switchStates} allTransactions={allTransactions} />} />
+          <Route path="/" element={<Piggy whichStateEnabled={switchStates} allTransactions={allTransactions} budget={budgetValue}/>} />
           <Route path="/Transactions" element={<Transactions sortedTransactions={sortedTransactions} />} />
           <Route path="/Settings" element={<Settings switchStates={switchStates} setSwitchStates={setSwitchStates}
             budgetValue={budgetValue} setBudgetValue={setBudgetValue} />} />

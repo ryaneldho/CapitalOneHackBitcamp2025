@@ -13,11 +13,13 @@ import '../css/App.css';
 type Props = {
   whichStateEnabled: SwitchStates;
   allTransactions: Transaction[];
+  budget: string;
 };
 
 type SummaryProps = {
   earnings: number,
   spent: number
+  budget: string
 }
 
 const typeToState: Record<string, keyof SwitchStates> = {
@@ -30,7 +32,7 @@ const typeToState: Record<string, keyof SwitchStates> = {
 };
 
 
-export default function Piggy({whichStateEnabled, allTransactions}: Props) {
+export default function Piggy({whichStateEnabled, allTransactions, budget}: Props) {
   let earnings = 0;
   let spent = 0;
 
@@ -57,7 +59,7 @@ export default function Piggy({whichStateEnabled, allTransactions}: Props) {
       </Typography>
 
       <Box className="container">
-        <Summary earnings={earnings} spent={spent}/>
+        <Summary earnings={earnings} spent={spent} budget={budget}/>
         <ImageAndBar />
         <PiggyToTransactions />
       </Box>
@@ -74,7 +76,7 @@ function Header() {
   );
 }
 
-function Summary({earnings, spent}: SummaryProps) {
+function Summary({earnings, spent, budget}: SummaryProps) {
   return (
     <Box className="summary">
       <Box className="summaryDetails">
@@ -87,10 +89,10 @@ function Summary({earnings, spent}: SummaryProps) {
       </Box>
       <Box className="summaryDetails">
         <Typography variant="subtitle1" id="budget">
-          Budget: <br /> $1000.00
+          Budget: <br />${Number(budget).toFixed(2)}
         </Typography>
         <Typography variant="subtitle1" id="netChange">
-          Change: <br /> -$500.00
+          Change: <br />${(earnings-spent).toFixed(2)}
         </Typography>
       </Box>
     </Box>
