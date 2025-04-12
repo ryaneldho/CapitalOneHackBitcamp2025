@@ -1,24 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import TestDashboard from './components/TestDashboard';
+
+const accountId = "67f9f6fb9683f20dd5194d5c"
+const testMerchantIkea = "66ef43749683f20dd518a511"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Dashboard</h1>
+      <TestDashboard userId = {accountId}/>
     </div>
   );
 }
