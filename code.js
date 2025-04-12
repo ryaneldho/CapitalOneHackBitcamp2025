@@ -16,3 +16,7 @@ function updateFillBar() {
 function goToExpandTransactions() {
     window.location.href = "transactions.html";
 }
+
+function goToSettings(){
+  
+}
