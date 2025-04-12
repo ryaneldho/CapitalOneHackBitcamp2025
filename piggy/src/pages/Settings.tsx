@@ -1,15 +1,22 @@
 import React, { useState } from 'react';
 import '../css/settings.css';
-import { Typography, Button, Box, FormGroup, Switch, FormControlLabel } from '@mui/material';
+import { Typography, Button, Box, FormGroup, Switch, FormControlLabel, TextField } from '@mui/material';
 
 interface SettingsProps {
   switchStates: SwitchStates;
   setSwitchStates: React.Dispatch<React.SetStateAction<SwitchStates>>;
+  budgetValue: string;
+  setBudgetValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
 interface OptionsProps {
   switchStates: SwitchStates;
   setSwitchStates: React.Dispatch<React.SetStateAction<SwitchStates>>;
+}
+
+interface BudgetProps {
+  budgetValue: string;
+  setBudgetValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
 type SwitchStates = {
@@ -22,20 +29,19 @@ type SwitchStates = {
 };
 
 
-function Settings({ switchStates, setSwitchStates }: SettingsProps) {
+function Settings({ switchStates, setSwitchStates, budgetValue, setBudgetValue }: SettingsProps) {
   // return (
   //   <div className="Settings">
       
   //   </div>
   // );
-
-  const depositsCheck = switchStates.deposits;
-  const loansCheck = switchStates.loans;
-  const transfersCheck = switchStates.transfers;
   
   return (
     <Box className="border">
       <Header/>
+      <Box>
+        <Budget budgetValue={budgetValue} setBudgetValue={setBudgetValue}/>
+      </Box>   
       <Options switchStates={switchStates} setSwitchStates={setSwitchStates} />
     
     </Box>)
@@ -51,6 +57,18 @@ function Header() {
         GO BACK
       </Button>
     </Box>
+  );
+}
+
+function Budget({ budgetValue, setBudgetValue }: BudgetProps){
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setBudgetValue(event.target.value);
+  };
+
+  return (
+    <TextField id="budget" required label="Enter your budget" variant="outlined" value={budgetValue}
+    onChange={handleChange} type="number" sx={{transform: 'scale(1.5)', margin: 1}} />
   );
 }
 

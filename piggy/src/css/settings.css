@@ -16,7 +16,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 24px;
+    margin-bottom: 10%;
   }
 
   .container {
@@ -27,6 +27,8 @@ body {
   .options{
     font-family: 'Raleway';
     size: 100px;
+    margin-top: 10%;
   }
+
 
 
