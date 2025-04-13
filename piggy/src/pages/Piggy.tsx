@@ -202,7 +202,10 @@ function FillBar({ value }: { value: number }){
           alignContent: 'center',
           borderRadius: 5,
           '& .MuiLinearProgress-bar': {
-            backgroundColor: '#e5b438',
+            backgroundColor: 
+            fillBarValue < 25 ? '#a1ae74' :         // green if under 50%
+            fillBarValue < 75 ? '#ffc664' :         // gold/yellow between 50%-80%
+            '#ec6b69',                             // red if over 80%
           },
         }}
       />
