@@ -111,7 +111,7 @@ export default function Piggy({whichStateEnabled, allTransactions, budget, selec
       </Typography>
 
       <Box className="cashAndMonth">
-        <Typography variant="h1" id="budget" sx={{ fontFamily:'Special Gothic Expanded One', fontSize:'40px', textAlign: 'left',  marginLeft: '-10px',}}>
+        <Typography variant="h1" id="budget" sx={{ fontFamily:'Special Gothic Expanded One', fontSize:'40px', textAlign: 'left',  marginLeft: '10px',}}>
           ${Number(budget).toFixed(2)}
         </Typography>
 
