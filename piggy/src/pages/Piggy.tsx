@@ -206,7 +206,7 @@ function Summary({earnings, spent, budget}: SummaryProps) {
         </Box>
         <Box id="netChange">
           <Typography variant="subtitle1">
-          <span>Money In</span>
+          <span>Net Change</span>
             <br/>
             <span style={{
               fontFamily:'Special Gothic Expanded One',
