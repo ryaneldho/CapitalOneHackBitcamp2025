@@ -146,26 +146,31 @@ function Summary({earnings, spent, budget}: SummaryProps) {
       <Box className="summaryDetails">
         <Box id="earningsMade">
           <Typography variant="subtitle1">
-            <span style={{}}>Money In</span>
+            <span>Money In</span>
             <br/>
             <span style={{ 
+              color:'#a1ae74',
               fontFamily:'Special Gothic Expanded One'}}> ${earnings.toFixed(2)}</span>
           </Typography>
         </Box>
         <Box id="moneySpent">
           <Typography variant="subtitle1">
-          <span style={{}}>Money Out</span>
+          <span>Money Out</span>
             <br/>
             <span style={{ 
-              fontFamily:'Special Gothic Expanded One'}}> ${spent.toFixed(2)}</span>
+              fontFamily:'Special Gothic Expanded One',
+              color:'#ec6b69' }}> ${spent.toFixed(2)}</span>
           </Typography>
         </Box>
         <Box id="netChange">
           <Typography variant="subtitle1">
-          <span style={{}}>Money In</span>
+          <span>Money In</span>
             <br/>
             <span style={{
-              fontFamily:'Special Gothic Expanded One'}}> ${(earnings-spent).toFixed(2)}</span>
+              fontFamily:'Special Gothic Expanded One',
+              color: (earnings-spent) < 0 ? '#ec6b69': '#a1ae74'
+              
+              }}> ${(earnings-spent).toFixed(2)}</span>
           </Typography>
         </Box>
       </Box>
