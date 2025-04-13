@@ -1,6 +1,4 @@
 import {
-  Typography,
-  Button,
   Box,
   Table,
   TableBody,

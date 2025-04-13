@@ -10,7 +10,7 @@ import { useTransactions } from './hooks/useTransactions';
 import { Transaction } from './hooks/useTransactions'
 
 
-const accountId = "67f9f6fb9683f20dd5194d5c"
+const accountId = "67fb4a069683f20dd51955e3"
 const testMerchantIkea = "66ef43749683f20dd518a511"
 
 export interface SwitchStates {

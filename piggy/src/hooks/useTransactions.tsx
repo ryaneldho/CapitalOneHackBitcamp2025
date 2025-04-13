@@ -36,7 +36,12 @@ export function useTransactions(userId: string) {
         }))
       );
       setWithdrawals(withdrawRes.data);
-      setTransfers(transferRes.data);
+      setTransfers(
+        transferRes.data.map((transfer) => ({
+          ...transfer,
+          type: 'transfer',
+        }))
+      );
       setBills(billRes.data);
     } catch (err) {
       console.error(err);
