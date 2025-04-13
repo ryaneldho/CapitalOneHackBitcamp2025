@@ -22,9 +22,10 @@ import backButton from '../assets/backButton.png'
 type Props = {
   sortedTransactions: Transaction[];
   selectedMonth: string;    
+  selectedYear: string;
 };
 
-export default function Transactions({ sortedTransactions, selectedMonth }: Props) {
+export default function Transactions({ sortedTransactions, selectedMonth, selectedYear }: Props) {
   const [clicked, setClicked] = useState<boolean>(false);
   const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' }>({
     key: 'date',
@@ -32,15 +33,35 @@ export default function Transactions({ sortedTransactions, selectedMonth }: Prop
   });
   const navigate = useNavigate();
 
-  const filteredByMonth = sortedTransactions.filter((transaction) => {
+  // const filteredByMonth = sortedTransactions.filter((transaction) => {
+  //   const rawDate = transaction.transaction_date || transaction.purchase_date;
+  //   if (!rawDate) return false;
+  //   const txDate = new Date(rawDate);
+  //   const monthName = txDate.toLocaleString('default', { month: 'long' });
+  //   return monthName === selectedMonth;
+  // });
+
+  // const filteredByYear = filteredByMonth.filter((transaction) =>{
+  //   const rawDate = transaction.transaction_date || transaction.purchase_date;
+  //   if (!rawDate) return false;
+  //   const txDate = new Date(rawDate);
+  //   const monthName = txDate.toLocaleString('default', { year: 'numeric' });
+  //   return monthName === selectedMonth;
+  // })
+
+  const filteredByMonthAndYear = sortedTransactions.filter((transaction) => {
     const rawDate = transaction.transaction_date || transaction.purchase_date;
     if (!rawDate) return false;
+  
     const txDate = new Date(rawDate);
-    const monthName = txDate.toLocaleString('default', { month: 'long' });
-    return monthName === selectedMonth;
+  
+    const monthMatch = txDate.toLocaleString('default', { month: 'long' }) == selectedMonth;
+    const yearMatch = txDate.getFullYear().toString() == selectedYear;
+  
+    return monthMatch && yearMatch;
   });
 
-  const sortedRows = [...filteredByMonth].sort((a, b) => {
+  const sortedRows = [...filteredByMonthAndYear].sort((a, b) => {
 
     if (sortConfig.key === "date"){
       const dateA = new Date(a.transaction_date || a.purchase_date || "").getTime();

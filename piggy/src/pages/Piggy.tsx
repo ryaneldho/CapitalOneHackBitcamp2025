@@ -17,6 +17,8 @@ type Props = {
   budget: string;
   selectedMonth: string;
   setSelectedMonth: React.Dispatch<React.SetStateAction<string>>;
+  selectedYear: string;
+  setSelectedYear: React.Dispatch<React.SetStateAction<string>>
 };
 
 type SummaryProps = {
@@ -39,9 +41,12 @@ const months = [
   'July', 'August', 'September', 'October', 'November', 'December',
 ];
 
+const currentYear = new Date().getFullYear();
+const years = Array.from({ length: 30 }, (_, i) => currentYear - i);
 
 
-export default function Piggy({whichStateEnabled, allTransactions, budget, selectedMonth, setSelectedMonth}: Props) {
+
+export default function Piggy({whichStateEnabled, allTransactions, budget, selectedMonth, setSelectedMonth, selectedYear, setSelectedYear}: Props) {
   let earnings = 0;
   let spent = 0;
 
@@ -50,16 +55,39 @@ export default function Piggy({whichStateEnabled, allTransactions, budget, selec
     const transactionType = transaction.type;
     return whichStateEnabled[typeToState[transactionType]];
   });
+  console.log(filteredTransactions)
 
-  const filteredByMonth = filteredTransactions.filter((transaction) => {
+  // const filteredByMonth = filteredTransactions.filter((transaction) => {
+  //   const rawDate = transaction.transaction_date || transaction.purchase_date;
+  //   if (!rawDate) return false;
+  //   const txDate = new Date(rawDate);
+  //   const monthName = txDate.toLocaleString('default', { month: 'long' });
+  //   return monthName === selectedMonth;
+  // });
+
+  // const filteredByYear = filteredTransactions.filter((transaction) => {
+  //   const rawDate = transaction.transaction_date || transaction.purchase_date;
+  //   if (!rawDate) return false;
+  //   const txDate = new Date(rawDate);
+  //   const yearName = txDate.toLocaleString('default', { year: 'numeric' });
+  //   return yearName === selectedYear;
+  // });
+
+  const filteredByMonthAndYear = filteredTransactions.filter((transaction) => {
     const rawDate = transaction.transaction_date || transaction.purchase_date;
     if (!rawDate) return false;
+  
     const txDate = new Date(rawDate);
-    const monthName = txDate.toLocaleString('default', { month: 'long' });
-    return monthName === selectedMonth;
+  
+    const monthMatch = txDate.toLocaleString('default', { month: 'long' }) == selectedMonth;
+    console.log(txDate.getFullYear().toString())
+    console.log(selectedYear)
+    const yearMatch = txDate.getFullYear().toString() == selectedYear;
+  
+    return monthMatch && yearMatch;
   });
-
-  filteredByMonth.forEach((transaction) => {
+  console.log(filteredByMonthAndYear)
+  filteredByMonthAndYear.forEach((transaction) => {
     const type = transaction.type
     if (['deposit', 'loan'].includes(type)) {
       earnings += transaction.amount;
@@ -67,10 +95,7 @@ export default function Piggy({whichStateEnabled, allTransactions, budget, selec
       spent += transaction.amount;
     }
   });
-
-  console.log(budget);
-  console.log(spent)
-  console.log(earnings)
+  
   let percent = (spent - earnings) / Number(budget)
 
 
@@ -85,7 +110,7 @@ export default function Piggy({whichStateEnabled, allTransactions, budget, selec
       </Typography>
 
       <Box className="cashAndMonth">
-        <Typography variant="h1" id="budget" sx={{ fontFamily:'Special Gothic Expanded One', fontSize:'50px', textAlign: 'left',  marginLeft: '10px',}}>
+        <Typography variant="h1" id="budget" sx={{ fontFamily:'Special Gothic Expanded One', fontSize:'40px', textAlign: 'left',  marginLeft: '-10px',}}>
           ${Number(budget).toFixed(2)}
         </Typography>
 
@@ -93,14 +118,30 @@ export default function Piggy({whichStateEnabled, allTransactions, budget, selec
           value={selectedMonth}
           onChange={(e) => setSelectedMonth(e.target.value)}      
           variant = 'standard'
-          sx={{ fontSize: '2.0rem', ml: 1 }}
-          defaultValue='Aptil'
+          sx={{ fontSize: '1.5rem', ml: 1, marginLeft:"20px"  }}
+          defaultValue='April'
           disableUnderline
           id="month"
         >
           {months.map((month, index) => (
             <MenuItem key={month} value={month}>
               {month}
+            </MenuItem>
+          ))}
+        </Select>
+
+        <Select
+          value={selectedYear}
+          onChange={(e) => setSelectedYear(e.target.value)}      
+          variant = 'standard'
+          sx={{ fontSize: '1.2rem', ml: 1 }}
+          defaultValue='2025'
+          disableUnderline
+          id="year"
+        >
+          {years.map((year, index) => (
+            <MenuItem key={year} value={year}>
+              {year}
             </MenuItem>
           ))}
         </Select>

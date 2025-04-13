@@ -53,12 +53,15 @@ function App() {
 
   const [selectedMonth, setSelectedMonth] = useState("April");
 
+  const [selectedYear, setSelectedYear] = useState("2025")
+
   return (
     <div className="App">
       <Router>
         <Routes>
-          <Route path="/" element={<Piggy whichStateEnabled={switchStates} allTransactions={allTransactions} budget={budgetValue} selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth}/>} />
-          <Route path="/Transactions" element={<Transactions sortedTransactions={sortedTransactions} selectedMonth = {selectedMonth}/>} />
+          <Route path="/" element={<Piggy whichStateEnabled={switchStates} allTransactions={allTransactions} budget={budgetValue} 
+          selectedMonth={selectedMonth} setSelectedMonth={setSelectedMonth} selectedYear={selectedYear} setSelectedYear={setSelectedYear}/>} />
+          <Route path="/Transactions" element={<Transactions sortedTransactions={sortedTransactions} selectedMonth = {selectedMonth} selectedYear={selectedYear}/>} />
           <Route path="/Settings" element={<Settings switchStates={switchStates} setSwitchStates={setSwitchStates}
             budgetValue={budgetValue} setBudgetValue={setBudgetValue} />} />
         </Routes>
