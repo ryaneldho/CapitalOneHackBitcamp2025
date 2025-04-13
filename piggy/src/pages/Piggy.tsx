@@ -119,7 +119,7 @@ export default function Piggy({whichStateEnabled, allTransactions, budget, selec
           value={selectedMonth}
           onChange={(e) => setSelectedMonth(e.target.value)}      
           variant = 'standard'
-          sx={{ fontSize: '1.5rem', ml: 1, marginLeft:"20px"  }}
+          sx={{ fontSize: '1.3rem', ml: 1, marginLeft:"20px"  }}
           defaultValue='April'
           disableUnderline
           id="month"
@@ -135,7 +135,7 @@ export default function Piggy({whichStateEnabled, allTransactions, budget, selec
           value={selectedYear}
           onChange={(e) => setSelectedYear(e.target.value)}      
           variant = 'standard'
-          sx={{ fontSize: '1.2rem', ml: 1 }}
+          sx={{ fontSize: '1.1rem', ml: 1 }}
           defaultValue='2025'
           disableUnderline
           id="year"
