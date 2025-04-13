@@ -68,9 +68,6 @@ export default function Piggy({whichStateEnabled, allTransactions, budget, selec
     }
   });
 
-  console.log(budget);
-  console.log(spent)
-  console.log(earnings)
   let percent = (spent - earnings) / Number(budget)
 
 
