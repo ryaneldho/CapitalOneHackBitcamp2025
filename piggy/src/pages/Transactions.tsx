@@ -38,7 +38,7 @@ export default function Transactions({ sortedTransactions, selectedMonth }: Prop
   useEffect(() => {
     if (clicked) {
       setClicked(false)
-      navigate("/"); // Redirect after state update
+      navigate("/");
     }
   }, [clicked, navigate]);
 
@@ -49,7 +49,7 @@ export default function Transactions({ sortedTransactions, selectedMonth }: Prop
       </Button>
 
       <TableContainer className="table-container" component={Paper} sx={{ maxHeight: 750, maxWidth: 450, margin: '0 auto', overflowX: 'auto', overflowY: 'auto' }}>
-        <Table>
+        <Table sx={{backgroundColor: '#6F655B'}}>
           <TableHead>
             <TableRow>
               <TableCell><strong>Transaction #</strong></TableCell>
@@ -60,13 +60,23 @@ export default function Transactions({ sortedTransactions, selectedMonth }: Prop
           </TableHead>
           <TableBody>
             {filteredByMonth.map((row, idx) => (
+              // <TableRow
+              //   key={row._id}
+              // >
               <TableRow
                 key={row._id}
+                sx={{
+                  backgroundColor: ['deposit', 'loan'].includes(row.type) ? '#A1AE74' : '#EF9493',
+                  color: 'black',
+                  '& td': { color: 'black', fontWeight: 'bold' },
+                }}
               >
-                <TableCell>{idx + 1}</TableCell>
-                <TableCell color=''>{row.type.charAt(0).toUpperCase() + row.type.slice(1)}</TableCell>
-                <TableCell sx={{ color: ['deposit', 'loan'].includes(row.type) ? 'green' : 'red', fontWeight: 'bold'}}>{row.amount}</TableCell>
-                <TableCell>{row.purchase_date || row.transaction_date}</TableCell>
+
+                <TableCell className = "table-cell">{idx + 1}</TableCell>
+                <TableCell className = "table-cell "color=''>{row.type.charAt(0).toUpperCase() + row.type.slice(1)}</TableCell>
+                {/* <TableCell sx={{ color: ['deposit', 'loan'].includes(row.type) ? 'green' : 'red', fontWeight: 'bold'}}>{row.amount}</TableCell> */}
+                <TableCell className = "table-cell">{row.amount}</TableCell>
+                <TableCell className = "table-cell">{row.purchase_date || row.transaction_date}</TableCell>
               </TableRow>
             ))}
           </TableBody>
