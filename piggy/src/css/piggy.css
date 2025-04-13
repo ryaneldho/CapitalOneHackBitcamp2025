@@ -74,7 +74,7 @@ body {
 .summaryDetails h4,
 .summaryDetails .MuiTypography-root {
   background-color: #e3e2d6;
-  padding: 50px 30px;
+  padding: 50px 10px;
   border-radius: 12px;
   font-weight: normal;
   
@@ -97,6 +97,13 @@ body {
   display: block;
   position: relative;
   z-index: 1;
+}
+
+.bottomBar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+   
 }
 
 .fill-bar {

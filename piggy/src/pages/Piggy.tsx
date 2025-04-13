@@ -4,6 +4,7 @@ import piggyImage from '../assets/piggy.png';
 import '../css/piggy.css';
 import React, { useState } from 'react';
 import PiggyToTransactions from '../pages/PiggyToTransactions';
+import PiggyToCards from "../pages/PiggyToCards"
 import PiggyToSettings from './PiggyToSettings';
 import {SwitchStates} from '../App'
 import {Transaction} from '../hooks/useTransactions'
@@ -105,12 +106,12 @@ export default function Piggy({whichStateEnabled, allTransactions, budget, selec
         </Select>
       </Box>
 
-
-
-
       <Box className="container">
         <Summary earnings={earnings} spent={spent} budget={budget}/>
-        <PiggyToTransactions />
+        <Box className="bottomBar">
+          <PiggyToTransactions />
+          <PiggyToCards/>
+        </Box>
       </Box>
     </Box>
   );
@@ -143,15 +144,30 @@ function Summary({earnings, spent, budget}: SummaryProps) {
   return (
     <Box className="summary">
       <Box className="summaryDetails">
-        <Typography variant="subtitle1" id="earningsMade">
-          Money In: <br />${earnings.toFixed(2)}
-        </Typography>
-        <Typography variant="subtitle1" id="moneySpent">
-          Money Out: <br />${spent.toFixed(2)}
-        </Typography>
-        <Typography variant="subtitle1" id="netChange">
-          Net Change: <br />${(earnings-spent).toFixed(2)}
-        </Typography>
+        <Box id="earningsMade">
+          <Typography variant="subtitle1">
+            <span style={{}}>Money In</span>
+            <br/>
+            <span style={{ 
+              fontFamily:'Special Gothic Expanded One'}}> ${earnings.toFixed(2)}</span>
+          </Typography>
+        </Box>
+        <Box id="moneySpent">
+          <Typography variant="subtitle1">
+          <span style={{}}>Money Out</span>
+            <br/>
+            <span style={{ 
+              fontFamily:'Special Gothic Expanded One'}}> ${spent.toFixed(2)}</span>
+          </Typography>
+        </Box>
+        <Box id="netChange">
+          <Typography variant="subtitle1">
+          <span style={{}}>Money In</span>
+            <br/>
+            <span style={{
+              fontFamily:'Special Gothic Expanded One'}}> ${(earnings-spent).toFixed(2)}</span>
+          </Typography>
+        </Box>
       </Box>
     </Box>
   );

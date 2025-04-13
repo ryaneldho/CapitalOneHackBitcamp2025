@@ -18,9 +18,8 @@ const PiggyToTransactions = () => {
   
 
     return (
-      <Box className="buttons" display="flex" gap={3} justifyContent="center" mt={2}
-        sx={{textAlign: 'left',  marginLeft: '-240px'}}>
-        <Button variant="outlined" onClick={handleClick} sx={{ borderColor: '#000000', color: '#000000',}}>
+      <Box className="buttons" display="flex" gap={3} justifyContent="center" mt={2}>
+        <Button variant="outlined" onClick={handleClick}>
           Expand Transactions
         </Button>
       </Box>
