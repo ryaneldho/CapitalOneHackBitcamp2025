@@ -96,6 +96,7 @@ export default function Piggy({whichStateEnabled, allTransactions, budget, selec
     }
   });
   
+
   let percent = (spent - earnings) / Number(budget)
 
 

@@ -19,7 +19,7 @@ def main():
           continue
         else:
           reqUrl = url+"customers/"+customerId+"/accounts"+api_key_extension
-          print(reqUrl)
+          # print(reqUrl)
           payload = {
             "type": "Savings",
             "nickname": "test",
@@ -32,20 +32,23 @@ def main():
             data=json.dumps(payload),
             headers={'content-type':'application/json'},
           )
-          print(response)
+          print(response.json().get("objectCreated").get("customer_id"))
           continue
 
+      get_acc = input("Do you wanna get account #s (y/n): ")
+      if get_acc.strip().lower() == "y":
+        resp = requests.get(url + "accounts" + api_key_extension)
+        for entry in resp.json():
+          print(entry.get("_id"))
+          continue
       acc_num = input("Do you have a specific acc # you wanna use: (y/n): ")
       if acc_num.strip().lower() == "y":
-        acc_num = input("Enter 16 digit acc: ")
-        if len(new_acc) != 16:
-          print("Back to start")
-          continue
+        acc_num = input("Enter accE: ")
       else:
         acc_num = defaultAcc 
       
-      means = input("Enter action: deposit, loan, purchase, transfer, withdrawal, bill, or exit: ").strip().lower()
-      if means not in ['deposit', 'loan', 'purchase', 'transfer', 'withdrawal', 'bill']:
+      means = input("Enter action: deposit, purchase, transfer, withdrawal, or exit: ").strip().lower()
+      if means not in ['deposit', 'purchase', 'transfer', 'withdrawal']:
         break
       
 
@@ -92,7 +95,13 @@ def main():
         }
         reqUrl = url+"accounts/"+acc_num+ "/transfers"+api_key_extension
       elif means == "withdrawal":
-        pass
+        date = input("Enter date in xxxx-mm-yy: ");
+        payload={
+          "medium": "balance",
+          "transaction_date": date,
+          "amount": amt
+        }
+        reqUrl = url+"accounts/"+acc_num+ "/withdrawals"+api_key_extension
       elif means == "bill":
         pass
       
