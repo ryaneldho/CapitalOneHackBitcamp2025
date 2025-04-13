@@ -173,19 +173,20 @@ function FillBar({ value }: { value: number }){
   let fillBarValue = Math.min(100, value)
   fillBarValue = Math.max(0, fillBarValue)
   return (
-    <Box sx={{ width: '100%', textAlign: 'center', mt: 2 }}>
+    <Box sx={{ width: '150%', textAlign: 'center', mt: 2 }}>
       <Typography variant="subtitle1" sx={{fontSize:'20px',}}>
         Budget Usage: {value.toFixed(1)}%
       </Typography>
       <LinearProgress
         variant="determinate"
         value={fillBarValue}
-        className="fill-bar"
+        // className="fill-bar"
         sx={{
           height: 25,
+          alignContent: 'center',
           borderRadius: 5,
           '& .MuiLinearProgress-bar': {
-            backgroundColor: '#e5b438', // same as your custom bar color
+            backgroundColor: '#e5b438',
           },
         }}
       />
