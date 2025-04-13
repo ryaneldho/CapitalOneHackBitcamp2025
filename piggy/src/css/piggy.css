@@ -30,16 +30,13 @@ body {
 }
 
 #settings {
-  width: 32px;
+  width: 10px;
   height: 32px;
   cursor: pointer;
 }
 
-#summaryTitle {
-  font-family: 'Raleway';
-  font-weight: 600;
-  margin-bottom: 20px;
-  text-align: center;
+#month {
+    font-size: smaller;
 }
 
 .container {
@@ -50,28 +47,38 @@ body {
 
 .summary {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
   margin-bottom: 32px;
+  justify-content: space-evenly;
 }
 
 .summaryDetails {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  align-items: 'center';
   flex-wrap: wrap;
-  gap: 16px;
+  gap: 10px;
+  
+}
+
+.cashAndMonth{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 
 .summaryDetails h4,
 .summaryDetails .MuiTypography-root {
-  background-color: #fbe6c2;
-  padding: 12px 40px;
+  background-color: #e3e2d6;
+  padding: 50px 30px;
   border-radius: 12px;
   font-weight: normal;
+  
 }
-
 
 .piggy-container {
   width: 100%;
