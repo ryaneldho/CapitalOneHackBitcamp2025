@@ -22,7 +22,12 @@ const PiggyToSettings = () => {
             <Typography variant="h5" id="welcome">
                 Hello Ryan!
             </Typography>
-            <img src={settings} id="settings" alt="Settings" onClick={handleClick}/>
+            <img src={settings} id="settings" alt="Settings" onClick={handleClick}
+             style={{
+                height: '50px',
+                cursor: 'pointer',
+                width: '50px',
+              }}/>
         </Box>
 
     );

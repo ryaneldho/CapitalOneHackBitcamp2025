@@ -17,6 +17,7 @@ import { Transaction } from '../hooks/useTransactions';
 import { useTransactions } from '../hooks/useTransactions';
 import '../css/transactions.css';
 import '../css/App.css'
+import backButton from '../assets/backButton.png'
 
 
 type Props = {
@@ -44,9 +45,14 @@ export default function Transactions({ sortedTransactions, selectedMonth }: Prop
 
   return (
     <Box className="border">
-      <Button variant="outlined" color="error" sx={{ mb: 2 }} onClick={() => setClicked(true)}>
-        GO BACK
-      </Button>
+      <img src={backButton} id="backButton" alt="backButton" sizes="small" onClick={() => setClicked(true)}
+         style={{
+          height: '50px',
+          position: 'relative',
+          left: '-200px',
+          cursor: 'pointer',
+          width: '50px',
+      }}/>
 
       <TableContainer className="table-container" component={Paper} sx={{ maxHeight: 750, maxWidth: 450, margin: '0 auto', overflowX: 'auto', overflowY: 'auto' }}>
         <Table sx={{backgroundColor: '#6F655B'}}>
