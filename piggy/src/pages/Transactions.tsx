@@ -8,6 +8,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TableSortLabel,
   Paper
 } from '@mui/material';
 import React, { useState, useEffect } from "react";
@@ -27,6 +28,10 @@ type Props = {
 
 export default function Transactions({ sortedTransactions, selectedMonth }: Props) {
   const [clicked, setClicked] = useState<boolean>(false);
+  const [sortConfig, setSortConfig] = useState<{ key: string; direction: 'asc' | 'desc' }>({
+    key: 'date',
+    direction: 'asc',
+  });
   const navigate = useNavigate();
 
   const filteredByMonth = sortedTransactions.filter((transaction) => {
@@ -36,12 +41,35 @@ export default function Transactions({ sortedTransactions, selectedMonth }: Prop
     const monthName = txDate.toLocaleString('default', { month: 'long' });
     return monthName === selectedMonth;
   });
+
+  const sortedRows = [...filteredByMonth].sort((a, b) => {
+
+    if (sortConfig.key === "date"){
+      const dateA = new Date(a.transaction_date || a.purchase_date || "").getTime();
+      const dateB = new Date(b.transaction_date || b.purchase_date || "").getTime();
+      return sortConfig.direction === 'asc' ? dateA - dateB : dateB - dateA;
+    }
+
+    const valA = a[sortConfig.key];
+    const valB = b[sortConfig.key];
+
+    if (valA < valB) return sortConfig.direction === 'asc' ? -1 : 1;
+    if (valA > valB) return sortConfig.direction === 'asc' ? 1 : -1;
+    return 0;
+  });
+  
   useEffect(() => {
     if (clicked) {
       setClicked(false)
       navigate("/");
     }
   }, [clicked, navigate]);
+
+  const handleSort = (key: string) => {
+    setSortConfig((prev) => ({
+      key,
+      direction: prev.key === key && prev.direction == "asc"? "desc": "asc",
+    }))}
 
   return (
     <Box className="border">
@@ -58,28 +86,58 @@ export default function Transactions({ sortedTransactions, selectedMonth }: Prop
         <Table sx={{backgroundColor: '#6F655B'}}>
           <TableHead>
             <TableRow>
-              <TableCell><strong>Transaction #</strong></TableCell>
-              <TableCell><strong>Type</strong></TableCell>
-              <TableCell><strong>Amount ($)</strong></TableCell>
-              <TableCell><strong>Date</strong></TableCell>
+              <TableCell>
+                {/* <TableSortLabel
+                  active={sortConfig.key === 'index'}
+                  direction={sortConfig.key === 'index' ? sortConfig.direction : 'asc'}
+                  onClick={() => handleSort('index')}
+                > */}
+                  <strong>Transaction #</strong>
+                {/* </TableSortLabel> */}
+              </TableCell>
+              <TableCell>
+                <TableSortLabel
+                  active={sortConfig.key === 'type'}
+                  direction={sortConfig.key === 'type' ? sortConfig.direction : 'asc'}
+                  onClick={() => handleSort('type')}
+                >
+                  <strong>Type</strong>
+                </TableSortLabel>
+              </TableCell>
+              <TableCell>
+                <TableSortLabel
+                  active={sortConfig.key === 'amount'}
+                  direction={sortConfig.key === 'amount' ? sortConfig.direction : 'asc'}
+                  onClick={() => handleSort('amount')}
+                >
+                  <strong><strong>Amount ($)</strong></strong>
+                </TableSortLabel>
+              </TableCell>
+              <TableCell>
+                <TableSortLabel
+                  active={sortConfig.key === 'date'}
+                  direction={sortConfig.key === 'date' ? sortConfig.direction : 'asc'}
+                  onClick={() => handleSort('date')}
+                >
+                  <strong><strong>Date</strong></strong>
+                </TableSortLabel>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {filteredByMonth.map((row, idx) => (
-              // <TableRow
-              //   key={row._id}
-              // >
+            {sortedRows.map((row, idx) => (
               <TableRow
                 key={row._id}
                 sx={{
-                  backgroundColor: ['deposit', 'loan'].includes(row.type) ? '#A1AE74' : '#EF9493',
-                  color: 'black',
-                  '& td': { color: 'black', fontWeight: 'bold' },
-                }}
+                   backgroundColor: ['deposit', 'loan'].includes(row.type) ? '#A1AE74' : '#EF9493',
+                   color: 'black',
+                   '& td': { color: 'black', fontWeight: 'bold' },
+                 }}
               >
-
-                <TableCell className = "table-cell">{idx + 1}</TableCell>
-                <TableCell className = "table-cell "color=''>{row.type.charAt(0).toUpperCase() + row.type.slice(1)}</TableCell>
+                <TableCell>
+                    {idx + 1}
+                </TableCell>
+                <TableCell className = "table-cell">{row.type.charAt(0).toUpperCase() + row.type.slice(1)}</TableCell>
                 {/* <TableCell sx={{ color: ['deposit', 'loan'].includes(row.type) ? 'green' : 'red', fontWeight: 'bold'}}>{row.amount}</TableCell> */}
                 <TableCell className = "table-cell">{row.amount}</TableCell>
                 <TableCell className = "table-cell">{row.purchase_date || row.transaction_date}</TableCell>
