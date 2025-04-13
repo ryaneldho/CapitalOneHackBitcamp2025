@@ -129,11 +129,11 @@ function Header() {
 function SubHeader(){
   return (
     <Box className="subheader">
-         <Typography variant="subtitle1" id="slogan" fontSize={"20px"}>
+         <Typography variant="subtitle1" id="slogan" fontSize={"20px"} top="2px">
           A New Way to Budget
          </Typography>
 
-         <Typography variant="subtitle1" id="welcome" fontSize={"20px"}>
+         <Typography variant="subtitle1" id="welcome" fontSize={"20px"} top="2px">
          Hello Ryan!
          </Typography>
     </Box>
