@@ -9,7 +9,7 @@
   .table-container {
     height: 70vh; 
     overflow-y: auto;
-    border: 1px solid gray;
+    border: 1px solid #6F555B;
     margin: 0 auto;
     margin-top: 5%;
   }
@@ -20,14 +20,17 @@
   }
 
   .MuiTableCell-head {
-    /* padding: 10px; */
-    border: 1px solid gray;
+    padding: 10px;
     text-align: center;
   }
 
-  .MuiTableCell-body {
-    background: gray;
-  }
+  /* .MuiTableCell-body {  */
+    /* background: gray; */
+   /* } */
+
+   .table-cell{
+    border: 1px solid #6F655B;
+   }
 
   #returnPiggyBankPage {
     margin-top: 200%;
