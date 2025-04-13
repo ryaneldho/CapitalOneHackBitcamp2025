@@ -93,10 +93,8 @@ body {
 }
 
 .fill-bar {
-  width: 140%;
   height: 25px;
   background-color: #e5b438;
-  border-radius: 10px;
   opacity: 0.8;
   transition: width 0.4s ease-in-out;
 }

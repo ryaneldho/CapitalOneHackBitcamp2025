@@ -96,7 +96,7 @@ function Budget({ budgetValue, setBudgetValue }: BudgetProps){
       <Typography variant = "h4" id = "subHeaders" style={{fontSize:'23px', left: '16px', textAlign: 'left', marginLeft: '16px'}}>
         Budget Goals
       </Typography>
-      <TextField id="budget" required label="Enter your budget" variant="outlined" value={budgetValue}
+      <TextField id="budget" required label="Enter your budget ($)" variant="outlined" value={budgetValue}
       onChange={handleChange} type="number" sx={{transform: 'scale(1.5)',  height: '40px', //sets height for the whole input field
         '& input': {
           padding: '14px 14px', // controls inside text padding

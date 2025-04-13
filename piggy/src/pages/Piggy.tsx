@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography, Select, MenuItem, FormControl, InputLabel, Box } from '@mui/material';
+import { Card, CardContent, Typography, Select, MenuItem, FormControl, InputLabel, Box, LinearProgress } from '@mui/material';
 import settings from '../assets/settings.png';
 import piggyImage from '../assets/piggy.png';
 import '../css/piggy.css';
@@ -20,7 +20,7 @@ type Props = {
 
 type SummaryProps = {
   earnings: number,
-  spent: number
+  spent: number,
   budget: string
 }
 
@@ -67,12 +67,17 @@ export default function Piggy({whichStateEnabled, allTransactions, budget, selec
     }
   });
 
+  console.log(budget);
+  console.log(spent)
+  console.log(earnings)
+  let percent = (spent - earnings) / Number(budget)
+
 
   return (
     <Box className="border">
         <Header/>
         <SubHeader/>
-      <ImageAndBar />
+      <ImageAndBar value={percent} />
 
       <Typography variant="subtitle1" sx={{fontSize:'20px',}}>
         Allocated Budget
@@ -153,11 +158,38 @@ function Summary({earnings, spent, budget}: SummaryProps) {
   );
 }
 
-function ImageAndBar() {
+function ImageAndBar({ value }: { value: number }) {
   return (
     <Box className="piggy-container">
       <img src={piggyImage} id="piggyBank" alt="Piggy Bank" />
-      <div className="fill-bar" id="fillBar"></div>
+      {/* <div className="fill-bar" id="fillBar"></div> */}
+      <FillBar value={value}></FillBar>
+    </Box>
+  );
+}
+
+function FillBar({ value }: { value: number }){
+  value *= 100
+  value = Math.max(value, 0)
+  let fillBarValue = Math.min(100, value)
+  fillBarValue = Math.max(0, fillBarValue)
+  return (
+    <Box sx={{ width: '100%', textAlign: 'center', mt: 2 }}>
+      <Typography variant="subtitle1" sx={{fontSize:'20px',}}>
+        Budget Usage: {value.toFixed(1)}%
+      </Typography>
+      <LinearProgress
+        variant="determinate"
+        value={fillBarValue}
+        className="fill-bar"
+        sx={{
+          height: 25,
+          borderRadius: 5,
+          '& .MuiLinearProgress-bar': {
+            backgroundColor: '#e5b438', // same as your custom bar color
+          },
+        }}
+      />
     </Box>
   );
 }

@@ -49,7 +49,7 @@ function App() {
     bills: true,
   });
 
-  const [budgetValue, setBudgetValue] = useState('');
+  const [budgetValue, setBudgetValue] = useState('10');
 
   const [selectedMonth, setSelectedMonth] = useState("April");
 
