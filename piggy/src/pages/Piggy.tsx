@@ -70,33 +70,37 @@ export default function Piggy({whichStateEnabled, allTransactions, budget, selec
 
   return (
     <Box className="border">
-      <Header/>
+        <Header/>
+        <SubHeader/>
+      <ImageAndBar />
 
-    <Typography variant="h4" id="summaryTitle">
-      Summary for
-      <Select
-        value={selectedMonth}
-        onChange={(e) => setSelectedMonth(e.target.value)}      
-        variant = 'standard'
-        sx={{ fontSize: '2.0rem', ml: 1 }}
-        defaultValue='Aptil'
-        disableUnderline
-        id="summaryTitle"
-      >
-        {months.map((month, index) => (
-          <MenuItem key={month} value={month}>
-            {month}
-          </MenuItem>
-        ))}
-      </Select>
-    </Typography>
+      <Typography variant="subtitle1" sx={{fontSize:'20px',}}>
+        Allocated Budget
+      </Typography>
+
+      <Typography variant="h4" id="summaryTitle">
+        <Select
+          value={selectedMonth}
+          onChange={(e) => setSelectedMonth(e.target.value)}      
+          variant = 'standard'
+          sx={{ fontSize: '2.0rem', ml: 1 }}
+          defaultValue='Aptil'
+          disableUnderline
+          id="summaryTitle"
+        >
+          {months.map((month, index) => (
+            <MenuItem key={month} value={month}>
+              {month}
+            </MenuItem>
+          ))}
+        </Select>
+      </Typography>
 
 
 
 
       <Box className="container">
         <Summary earnings={earnings} spent={spent} budget={budget}/>
-        <ImageAndBar />
         <PiggyToTransactions />
       </Box>
     </Box>
@@ -108,6 +112,20 @@ function Header() {
   return (
     <Box className="header">
       <PiggyToSettings/>
+    </Box>
+  );
+}
+
+function SubHeader(){
+  return (
+    <Box className="subheader">
+         <Typography variant="subtitle1" id="slogan" fontSize={"20px"}>
+          A New Way to Budget
+         </Typography>
+
+         <Typography variant="subtitle1" id="welcome" fontSize={"20px"}>
+         Hello Ryan!
+         </Typography>
     </Box>
   );
 }

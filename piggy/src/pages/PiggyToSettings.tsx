@@ -18,15 +18,17 @@ const PiggyToSettings = () => {
     };
 
     return(
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 35}}>
-            <Typography variant="h5" id="welcome">
-                Hello Ryan!
+        <Box sx={{ display: 'flex', justifyContent: 'space-between'}}>
+            <Typography variant="h4" id="welcome" top='-15px' 
+            sx={{ fontFamily:'Special Gothic Expanded One', fontSize:'48px', marginRight: '21px',}} >
+               MONEY HOG
             </Typography>
             <img src={settings} id="settings" alt="Settings" onClick={handleClick}
              style={{
-                height: '50px',
+                height: '30px',
                 cursor: 'pointer',
-                width: '50px',
+                width: '30px',
+                marginLeft: "30px"
               }}/>
         </Box>
 
