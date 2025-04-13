@@ -27,6 +27,7 @@ body {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 12px;
+  margin-top: -40px;
 }
 
 #settings {
