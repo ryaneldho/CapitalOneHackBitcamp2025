@@ -74,11 +74,15 @@ export default function Piggy({whichStateEnabled, allTransactions, budget, selec
         <SubHeader/>
       <ImageAndBar />
 
-      <Typography variant="subtitle1" sx={{fontSize:'20px',}}>
+      <Typography variant="subtitle1" sx={{fontSize:'20px',textAlign: 'left',  marginLeft: '16px',}}>
         Allocated Budget
       </Typography>
 
-      <Typography variant="h4" id="summaryTitle">
+      <Box className="cashAndMonth">
+        <Typography variant="h1" id="budget" sx={{ fontFamily:'Special Gothic Expanded One', fontSize:'50px', textAlign: 'left',  marginLeft: '10px',}}>
+          ${Number(budget).toFixed(2)}
+        </Typography>
+
         <Select
           value={selectedMonth}
           onChange={(e) => setSelectedMonth(e.target.value)}      
@@ -86,7 +90,7 @@ export default function Piggy({whichStateEnabled, allTransactions, budget, selec
           sx={{ fontSize: '2.0rem', ml: 1 }}
           defaultValue='Aptil'
           disableUnderline
-          id="summaryTitle"
+          id="month"
         >
           {months.map((month, index) => (
             <MenuItem key={month} value={month}>
@@ -94,7 +98,7 @@ export default function Piggy({whichStateEnabled, allTransactions, budget, selec
             </MenuItem>
           ))}
         </Select>
-      </Typography>
+      </Box>
 
 
 
@@ -139,11 +143,6 @@ function Summary({earnings, spent, budget}: SummaryProps) {
         </Typography>
         <Typography variant="subtitle1" id="moneySpent">
           Money Out: <br />${spent.toFixed(2)}
-        </Typography>
-      </Box>
-      <Box className="summaryDetails">
-        <Typography variant="subtitle1" id="budget">
-          Budget: <br />${Number(budget).toFixed(2)}
         </Typography>
         <Typography variant="subtitle1" id="netChange">
           Net Change: <br />${(earnings-spent).toFixed(2)}

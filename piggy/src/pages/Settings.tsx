@@ -179,7 +179,7 @@ function Options({ switchStates, setSwitchStates }: OptionsProps) {
             sx={{transform: 'scale(1.5)', margin: 1}}/>}
             label="Transfers" />
             <br/>
-            <FormControlLabel id="bills" control={<Switch defaultChecked id="bills" checked={switchStates.transfers} onChange={handleChange} size="medium" 
+            <FormControlLabel id="bills" control={<Switch defaultChecked id="bills" checked={switchStates.bills} onChange={handleChange} size="medium" 
             sx={{transform: 'scale(1.5)', margin: 1}}/>}
             label="Bills" />
         </FormGroup>
